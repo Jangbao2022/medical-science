@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>Term</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="title">
+            <div class="left-arr"></div>
+            <div class="right-arr"></div>
+            <div class="container">
+                <div class="columns ten alpha title-inner">
+                    <h1>专业术语</h1>
+                    <p th:text="${term.name}">名字</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="separator35"></div>
+            <!-- Left Part -->
+            <div class="columns twelve">
+                <!-- Blog Item -->
+                <div class="post-entry">
+                    <h2><a href="#">[[${term.name}]] ([[${term.englishName}]])</a></h2>
+                    <a th:href="@{/admin/term/delete(id=${term.id})}"
+                       style="float: right; margin-top: 64px;margin-left: 34px;"
+                       class="btn btn-blue"><span>删除</span></a>
+                    <a href="#" th:href="@{/admin/term/update_page(id=${term.id})}"
+                       style="float: right;  margin-top: 64px;"
+                       class="btn btn-blue"><span>修改</span></a>
+                    <h3></h3>
+                    <div class="post-info">
+                        <div class="post-date">[[${#dates.format(term.gmtCreated,'dd')}]]日
+                            <strong th:text="${#dates.format(term.gmtCreated,'M')}+'月'">MAR</strong>
+                        </div>
+                        <div class="line-grey"></div>
+                        <div class="post-categories"><strong>类型:</strong>
+                            <a href="#" th:text="${term.termTypeName}">xxx</a>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <p th:text="${term.description}">Variations of passages of Lorem Ipsum available, but the
+                            majority suffered alteration in some
+                            form, by injected. Humour, or randomised words wthich don't look even slightly believable.
+                            If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything
+                            embarrassing hidden. In the middle of text. All the Lorem Ipsum generators on the Internet
+                            tend to repeat predefined chunks as necessary, making this the first true generator on the
+                            Internet uses a dictionary of over. </p>
+                        <!--<blockquote class="grey-blo">-->
+                        <!--<p>Slightly believable. If you are going to use a passage you need to be sure. There-->
+                        <!--anything embarrassing hidden middle established fact that a reader .</p>-->
+                        <!--</blockquote>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>Home</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="container">
+            <div class="box-page-slogan">
+                <div id="slogan-slider-box">
+                    <ul class="slogan-slider">
+                        <li>
+                            <div class="text-top">
+                                你可以在这里找到许多医学影像专业词汇及其描述,它们将帮助你更好的理解和学习.
+                            </div>
+                            <div class="text-bottom">当你发现我们有遗漏的词汇时,请及时通知我们.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="full-width sub-title">
+                <h3>词汇分类</h3>
+                <div id="recent-navi"></div>
+            </div>
+            <div class="separator2"></div>
+            <div class="recent-box">
+                <div class="list_recent_over" id="recent-blog">
+                    <ul class="list_recent">
+                        <li th:each="termType,termTypeStat :${termTypes}">
+                            <div class="rec_img">
+                                <img th:src="'/images/212x127/doctor0'+${termTypeStat.index%4+1}+'.png'"
+                                     alt=""/></div>
+                            <h5><a th:href="@{/term/page_by_type(type_id=${termType.id})}" th:text="${termType.name}">Drive
+                                my soul</a>
+                                <p class="RoundBlueFirstLetter">
+                                    <mark th:text="${termType.count}">10</mark>
+                                </p>
+                            </h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="eight columns">
+                <h3 class="sub-title">常用词汇</h3>
+                <div class="separator9"></div>
+                <ul class="recent_blog">
+                    <li th:each="term,termStat :${terms}">
+                        <a th:href="'/images/recent_blog/00'+${termStat.index%2+1}+'-cop.png'" class="fancybox">
+                            <img th:src="'/images/recent_blog/00'+${termStat.index%2+1}+'-cop.png'" alt=""/>
+                            <span class="over_bg"></span></a>
+                        <h5><a th:href="@{/term/find_by_id(id=${term.id})}" href="#">[[${term.name}]]
+                            ([[${term.englishName}]])</a></h5>
+                        <div class="details">
+                            <a th:href="@{/term/page_by_type(type_id=${term.termTypeId})}"
+                                                th:text="${term.termTypeName}">type</a>
+                        </div>
+                        <p th:text="${term.description}">描述...</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    </div>
+    <footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>

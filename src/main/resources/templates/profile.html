@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>Profile</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="title">
+            <div class="left-arr"></div>
+            <div class="right-arr"></div>
+            <div class="container">
+                <div class="columns ten alpha title-inner">
+                    <h1>个人资料</h1>
+                    <p>查看或修改个人资料 </p>
+                </div>
+            </div>
+        </div>
+        <div class="separator31"></div>
+        <div class="container">
+            <div class="separator39"></div>
+            <div class="column two-thirds">
+                <div class="gallery">
+                    <div class="gallery-container">
+                        <ul>
+                            <li><a href="/images/large/im11.jpg" class="fancybox">
+                                <img src="/images/large/im11.jpg" alt=""/> <span
+                                    class="over-bg-portfolio"></span></a></li>
+                            <li><a href="/images/large/slide-05.jpg" class="fancybox">
+                                <img src="/images/large/slide-05.jpg" alt=""/> <span
+                                    class="over-bg-portfolio"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="column one-third portfolio-text">
+                <h3 class="sub-title">修改个人资料</h3>
+                <div class="separator2"></div>
+                <form action="/user/update_profile" method="post"/>
+                <div>
+                    <label>账号</label>
+                    <input type="text" disabled th:value="${session.user.account}" name="account"/>
+                </div>
+                <div>
+                    <label>姓名</label>
+                    <input type="text" th:value="${session.user.name}" name="name"/>
+                </div>
+                <div>
+                    <label>密码</label>
+                    <input type="password" th:value="${session.user.password}" name="password"/>
+                </div>
+                <input type="submit" value="提交" class="submit-btn"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>

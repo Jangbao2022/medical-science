@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>404</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="container">
+            <div class="page-404" style="height: 370px;">
+                <img src="/images/page-404.png" alt=""/>
+                <h3>对不起, 你访问的页面找不到了.</h3>
+                <p><a href="/index">回到主页</a></p>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>

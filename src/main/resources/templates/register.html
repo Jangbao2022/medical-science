@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/style.css" rel='stylesheet' type='text/css'/>
+</head>
+<body>
+<div class="main">
+    <div class="login">
+        <h1>医学影像术语管理</h1>
+        <div class="inset">
+            <form action="/login/do_register" method="post">
+                <h2>注册</h2>
+                <div>
+                    <span><label>姓名</label></span>
+                    <span><input type="text" name="name" required="required"
+                                 maxlength="15" class="textbox"></span>
+                </div>
+                <div>
+                    <span><label>账号</label></span>
+                    <span><input type="text" name="account" required="required"
+                                 minlength="8" maxlength="15" class="textbox"></span>
+                </div>
+                <div>
+                    <span><label>密码</label></span>
+                    <span><input type="password" name="password" required="required"
+                                 minlength="8" maxlength="15" class="password"></span>
+                </div>
+                <div style="font-size: 12px;">
+                    已有账号? <a href="/login/login_page">登录</a>
+                </div>
+                <p th:text="${msg}"></p>
+                <div class="sign">
+                    <input type="submit" value="注册" class="submit"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragment::loginFooter"></footer>
+
+</body>
+</html>

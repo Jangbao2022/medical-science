@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>TermTypes</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="title">
+            <div class="left-arr"></div>
+            <div class="right-arr"></div>
+            <div class="container">
+                <div class="columns ten alpha title-inner">
+                    <h1>术语种类</h1>
+                    <p></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="container" style="float: right;margin-top: 12px;height: 23px;font-size: 18px;">
+            <div style="float: right; margin-right: 22%;">
+                <h3><a href="#ADD" class="toggle-link">增加或修改</a></h3>
+                <div id="ADD" style="height: 54px; display: none;">
+                    <form action="/admin/term_type/add_or_update" method="post" class="sign-form"/>
+                    <label>原名称:</label>
+                    <input type="text" name="old_name" placeholder="不填则为增加"/>
+                    <div class="clear"></div>
+                    <label>新名称:</label>
+                    <input type="text" name="new_name" required="required" placeholder="新的术语类型"/>
+                    <p class="al-right">
+                        <input type="submit" value="提交" class="submit-btn" style="width: 43px"/></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <table style="margin-left: 10%;margin-top: 150px;font-size: 15px;width: 80%;
+                    border-spacing :10px;border-collapse: separate;">
+                <tr>
+                    <td>i</td>
+                    <td>名称</td>
+                    <td>所属术语数量</td>
+                    <td colspan="2">操作</td>
+                </tr>
+                <tr th:each="termType,termTypeStat:${termTypes}">
+                    <td th:text="${termTypeStat.index+1}">1</td>
+                    <td><a th:text="${termType.name}" th:href="@{/term/page_by_type(type_id=${termType.id})}"></a></td>
+                    <td th:text="${termType.count}"></td>
+                    <td><a th:href="@{/admin/term_type/delete(id=${termType.id})}" class="btn btn-blue"><span>删除</span></a>
+                    </td>
+                    <!--<td><a href="#" class="btn btn-blue"><span>修改</span></a></td>-->
+                </tr>
+            </table>
+            <div th:if="${errorMsg!=null}" class="note note-red" style="margin-top: 20px;width: 65%;margin-left: 11%">
+                <a href="#" class="close-note">Close Note</a>
+                <b>Note</b>: [[${errorMsg}]]
+            </div>
+            <div th:if="${successMsg!=null}" class="note note-green"
+                 style="margin-top: 20px;width: 65%;margin-left: 11%">
+                <a href="#" class="close-note">Close Note</a>
+                <b>Note</b>: [[${successMsg}]]
+            </div>
+
+            <div class="separator35"></div>
+            <div class="full-width">
+                <div class="pricing-table">
+                    <div class="pricing-row">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>
