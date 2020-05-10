@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>medical-science</name>
     <description>医学影响报告专业数据管理</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
