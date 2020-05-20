@@ -18,8 +18,8 @@ public class TermTypeAdminController {
 
     @RequestMapping("add_or_update")
     public String addOrUpdate(@RequestParam(name = "old_name", required = false) String oldName,
-                      @RequestParam(name = "new_name", required = true) String newName,
-                      Model model) {
+                              @RequestParam(name = "new_name", required = true) String newName,
+                              Model model) {
         TermType termType = new TermType()
                 .setName(newName);
         if ("".equals(oldName) || oldName == null) {
@@ -40,6 +40,7 @@ public class TermTypeAdminController {
         }
         return "forward:/term_type/page";
     }
+
 
     @RequestMapping("delete")
     public String delete(Long id, Model model) {

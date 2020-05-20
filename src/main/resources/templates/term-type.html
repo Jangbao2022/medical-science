@@ -17,7 +17,8 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <div class="container" style="float: right;margin-top: 12px;height: 23px;font-size: 18px;">
+        <div th:if="${session.user.power==1}" class="container"
+             style="float: right;margin-top: 12px;height: 23px;font-size: 18px;">
             <div style="float: right; margin-right: 22%;">
                 <h3><a href="#ADD" class="toggle-link">增加或修改</a></h3>
                 <div id="ADD" style="height: 54px; display: none;">
@@ -40,13 +41,14 @@
                     <td>i</td>
                     <td>名称</td>
                     <td>所属术语数量</td>
-                    <td colspan="2">操作</td>
+                    <td th:if="${session.user.power==1}" colspan="2">操作</td>
                 </tr>
                 <tr th:each="termType,termTypeStat:${termTypes}">
                     <td th:text="${termTypeStat.index+1}">1</td>
                     <td><a th:text="${termType.name}" th:href="@{/term/page_by_type(type_id=${termType.id})}"></a></td>
                     <td th:text="${termType.count}"></td>
-                    <td><a th:href="@{/admin/term_type/delete(id=${termType.id})}" class="btn btn-blue"><span>删除</span></a>
+                    <td th:if="${session.user.power==1}"><a th:href="@{/admin/term_type/delete(id=${termType.id})}"
+                                                            class="btn btn-blue"><span>删除</span></a>
                     </td>
                     <!--<td><a href="#" class="btn btn-blue"><span>修改</span></a></td>-->
                 </tr>

@@ -42,4 +42,5 @@ public class TermController {
         model.addAttribute("term", term);
         return "term-page";
     }
+
 }

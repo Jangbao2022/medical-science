@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * termService接口实现类
@@ -36,6 +37,7 @@ public class TermServiceImpl implements ITermService {
     public List<Term> getTermList(int size) {
         Page<Term> page = termDao.findAll(PageRequest.of(0, size));
         List<Term> content = page.getContent();
+        content = content.stream().filter((t) -> t.getType() == 1).collect(Collectors.toList());
         return content;
     }
 
@@ -67,6 +69,7 @@ public class TermServiceImpl implements ITermService {
             termPage = termDao.findAll(Example.of(new Term()), pageable);
         }
         List<Term> terms = termPage.getContent();
+        terms = terms.stream().filter((t) -> t.getType() == 1).collect(Collectors.toList());
         termPageDto.setElements(terms);
         return termPageDto;
     }
@@ -76,7 +79,6 @@ public class TermServiceImpl implements ITermService {
         String coreKeyWord = StringUtils.getKeyWordByRemoveSignal(keyWord, "@", "[", "]");
 
         Specification<Term> specification = SpecificationUtils.getLikeSpecification("name", coreKeyWord);
-
         PageDto<Term> termPageDto = getTermPageDto(page, size, "/search?key_word=", null, specification);
         return termPageDto;
     }

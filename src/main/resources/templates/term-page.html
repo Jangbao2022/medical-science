@@ -23,10 +23,10 @@
                 <!-- Blog Item -->
                 <div class="post-entry">
                     <h2><a href="#">[[${term.name}]] ([[${term.englishName}]])</a></h2>
-                    <a th:href="@{/admin/term/delete(id=${term.id})}"
+                    <a th:if="${session.user.power==1}" th:href="@{/admin/term/delete(id=${term.id})}"
                        style="float: right; margin-top: 64px;margin-left: 34px;"
                        class="btn btn-blue"><span>删除</span></a>
-                    <a href="#" th:href="@{/admin/term/update_page(id=${term.id})}"
+                    <a th:if="${session.user.power==1}" href="#" th:href="@{/admin/term/update_page(id=${term.id})}"
                        style="float: right;  margin-top: 64px;"
                        class="btn btn-blue"><span>修改</span></a>
                     <h3></h3>

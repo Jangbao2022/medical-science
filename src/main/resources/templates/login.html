@@ -23,7 +23,12 @@
                     <span><input type="password" name="password" required="required" value="12345678910"
                                  minlength="8" maxlength="15" class="password"></span>
                 </div>
-                <div style="font-size: 12px;">
+                <div>
+                    管理<input type="radio" name="power" required="required" value="1">
+                    医师<input type="radio" name="power" required="required" value="2">
+                    用户<input type="radio" name="power" required="required" value="3">
+                </div>
+                <div style="font-size: 12px;margin-top: 10px">
                     没有账号? <a href="/login/register_page">注册</a>
                 </div>
                 <p th:text="${msg}"></p>

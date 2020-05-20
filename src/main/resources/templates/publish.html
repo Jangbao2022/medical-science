@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::headImport"></head>
+<title>Publish</title>
+<body>
+<div class="wrapper">
+    <header th:replace="fragment::header"></header>
+    <div id="content-wrapper">
+        <div class="title">
+            <div class="left-arr"></div>
+            <div class="right-arr"></div>
+            <div class="container">
+                <div class="columns ten alpha title-inner">
+                    <h1>发布</h1>
+                    <p></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="container">
+            <table style="margin-left: 10%;margin-top: 150px;font-size: 15px;width: 80%;
+                    border-spacing :10px;border-collapse: separate;">
+                <tr>
+                    <td>术语名</td>
+                    <td>发布时间</td>
+                    <td>处理时间</td>
+                    <td>处理结果</td>
+                    <td colspan="2">操作</td>
+                </tr>
+                <tr th:each="publish:${publishList}">
+                    <td th:text="${publish.termName}"></td>
+                    <td th:text="${#dates.format(publish.gmtCreated,'yyyy/MM/dd')}"></td>
+                    <td th:text="${#dates.format(publish.gmtModified,'yyyy/MM/dd')}"></td>
+                    <td th:if="${publish.type==1}">未处理</td>
+                    <td th:if="${publish.type==2}">同意</td>
+                    <td th:if="${publish.type==3}">拒绝</td>
+                    <td><a th:if="${session.user.power==1&&publish.type==1}"
+                           th:href="@{/admin/publish/consent(publishId=${publish.id})}"
+                           class="btn btn-blue"><span>同意</span></a></td>
+                    <td><a th:if="${session.user.power==1&&publish.type==1}" href="#"
+                           th:href="@{/admin/publish/reject(publishId=${publish.id})}"
+                           class="btn btn-blue"><span>拒绝</span></a></td>
+                    <td th:if="${session.user.power==1&&publish.type!=1}">已处理</td>
+                </tr>
+            </table>
+            <div th:if="${errorMsg!=null}" class="note note-red" style="margin-top: 20px;width: 65%;margin-left: 11%">
+                <a href="#" class="close-note">Close Note</a>
+                <b>Note</b>: [[${errorMsg}]]
+            </div>
+            <div th:if="${successMsg!=null}" class="note note-green"
+                 style="margin-top: 20px;width: 65%;margin-left: 11%">
+                <a href="#" class="close-note">Close Note</a>
+                <b>Note</b>: [[${successMsg}]]
+            </div>
+
+            <div class="separator35"></div>
+            <div class="full-width">
+                <div class="pricing-table">
+                    <div class="pricing-row">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragment::mainFooter"></footer>
+</div>
+</body>
+</html>

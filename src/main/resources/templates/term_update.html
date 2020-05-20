@@ -12,7 +12,8 @@
             <div class="container">
                 <div class="columns ten alpha title-inner">
                     <h1 th:if="${term!=null}">更新术语--[[${term.name}]]</h1>
-                    <h1 th:if="${term==null}">增加术语</h1>
+                    <h1 th:if="${session.user.power==1&&term==null}">增加术语</h1>
+                    <h1 th:if="${session.user.power==2&&term==null}">发布术语</h1>
                     <p></p>
                 </div>
                 <div class="clear"></div>
@@ -24,49 +25,51 @@
             <div class="columns twelve send-mess">
                 <h3 class="sub-title"></h3>
                 <div class="separator2"></div>
-                <form action="/admin/term/add_or_update" method="post" class="contact-form"/>
-                <input type="text" style="display: none;" value="" th:value="${term!=null}?${term.termTypeId}:''"
-                       id="termTypeId"
-                       required="required" name="termTypeId"/>
-                <input type="text" style="display: none;" value="" th:value="${term!=null}?${term.id}:''"
-                       name="id"/>
-                <div class="columns four alpha">
-                    <label class="required">中文名</label>
-                    <input type="text" name="name" value="" th:value="${term!=null}?${term.name}:''" required="required"
-                           class="required"/>
-                </div>
-                <div class="columns four">
-                    <label class="required">英文名</label>
-                    <input type="text" name="englishName" value="" th:value="${term!=null}?${term.englishName}:''"
-                           required="required" class="required"/>
-                </div>
-                <div class="columns four omega">
-                    <label>类型</label>
-                    <input type="text" name="termTypeName" value="" th:value="${term!=null}?${term.termTypeName}:''"
-                           id="termTypeName" disabled="disabled" required="required"/>
-                </div>
-                <label>选择类型</label>
-                <div class="tags">
-                    <a class="tag-link" th:each="termType:${termTypes}" th:text="${termType.name}"
-                       onclick="pickTermType(this)" th:data="${termType.id}+'#'+${termType.name}">Design</a>
-                    <script>
-                        function pickTermType(element) {
-                            var attribute = element.getAttribute("data");
-                            var strings = attribute.split("#");
-                            var id = strings[0];
-                            var name = strings[1];
-                            var idElement = document.getElementById('termTypeId');
-                            idElement.setAttribute("value", id);
-                            var nameElement = document.getElementById('termTypeName');
-                            nameElement.setAttribute("value", name);
-                        }
-                    </script>
-                </div>
-                <div class="clear"></div>
-                <label class="required">描述</label>
-                <textarea cols="100" rows="10" class="required" th:text="${term!=null}?${term.description}:''"
-                          required="required" name="description"></textarea>
-                <input type="submit" value="提交" class="submit-btn"/>
+                <form th:action="${session.user.power==1}?'/admin/term/add_or_update':'/publish/do_publish'"
+                      method="post" class="contact-form">
+                    <input type="text" style="display: none;" value="" th:value="${term!=null}?${term.termTypeId}:''"
+                           id="termTypeId"
+                           required="required" name="termTypeId"/>
+                    <input type="text" style="display: none;" value="" th:value="${term!=null}?${term.id}:''"
+                           name="id"/>
+                    <div class="columns four alpha">
+                        <label class="required">中文名</label>
+                        <input type="text" name="name" value="" th:value="${term!=null}?${term.name}:''"
+                               required="required"
+                               class="required"/>
+                    </div>
+                    <div class="columns four">
+                        <label class="required">英文名</label>
+                        <input type="text" name="englishName" value="" th:value="${term!=null}?${term.englishName}:''"
+                               required="required" class="required"/>
+                    </div>
+                    <div class="columns four omega">
+                        <label>类型</label>
+                        <input type="text" name="termTypeName" value="" th:value="${term!=null}?${term.termTypeName}:''"
+                               id="termTypeName" disabled="disabled" required="required"/>
+                    </div>
+                    <label>选择类型</label>
+                    <div class="tags">
+                        <a class="tag-link" th:each="termType:${termTypes}" th:text="${termType.name}"
+                           onclick="pickTermType(this)" th:data="${termType.id}+'#'+${termType.name}">Design</a>
+                        <script>
+                            function pickTermType(element) {
+                                var attribute = element.getAttribute("data");
+                                var strings = attribute.split("#");
+                                var id = strings[0];
+                                var name = strings[1];
+                                var idElement = document.getElementById('termTypeId');
+                                idElement.setAttribute("value", id);
+                                var nameElement = document.getElementById('termTypeName');
+                                nameElement.setAttribute("value", name);
+                            }
+                        </script>
+                    </div>
+                    <div class="clear"></div>
+                    <label class="required">描述</label>
+                    <textarea cols="100" rows="10" class="required" th:text="${term!=null}?${term.description}:''"
+                              required="required" name="description"></textarea>
+                    <input type="submit" value="提交" class="submit-btn"/>
                 </form>
             </div>
             <div class="clear"></div>

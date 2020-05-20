@@ -51,6 +51,9 @@
     <div id="header-top">
         <div class="container">
             <div class="half-right">
+                <a href="#" class="toggle-sign" th:text="${session.user!=null&&session.user.power==1?'管理员':''}"></a>
+                <a href="#" class="toggle-sign" th:text="${session.user!=null&&session.user.power==2?'医师':''}"></a>
+                <a href="#" class="toggle-sign" th:text="${session.user!=null&&session.user.power==3?'用户':''}"></a>
                 <a href="#" class="toggle-sign" th:text="${session.user!=null?session.user.name:'未登录'}"></a>
                 <a href="/login/do_logon" class="left_wrapper">退出登录</a>
             </div>
@@ -64,6 +67,8 @@
                     <li><a href="/index">主页</a></li>
                     <li><a href="/term_type/page">术语种类</a></li>
                     <li><a href="/term/page">所有术语</a></li>
+                    <li th:if="${session.user.power==1}"><a href="/admin/publish/publish_page">所有发布</a></li>
+                    <li th:if="${session.user.power==2}"><a href="/publish/user_publish_page">我的发布</a></li>
                     <li><a href="/user/find_by_id">个人资料</a></li>
                     <!--<ul>-->
                     <!--<li><a href="#"></a></li>-->

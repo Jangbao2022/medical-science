@@ -1,7 +1,10 @@
 package com.boob.medical.service.impl;
 
 import com.boob.medical.dao.UserDao;
+import com.boob.medical.dao.UserMidUserTypeDao;
+import com.boob.medical.dao.UserTypeDao;
 import com.boob.medical.entity.User;
+import com.boob.medical.entity.UserMidUserType;
 import com.boob.medical.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,9 +22,12 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private UserMidUserTypeDao userMidUserTypeDao;
+
     @Override
     public User checkUserLogin(User user) {
-        if (user.getAccount() == null || user.getPassword() == null) {
+        if (user.getAccount() == null || user.getPassword() == null || user.getPower() == null) {
             return null;
         }
         List<User> users = userDao.findAll(Example.of(user));
@@ -46,10 +52,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void saveUser(User user) {
-        user.setPower(1);//设置为用户
         user.setGmtCreated(new Date());
         user.setGmtModified(user.getGmtCreated());
-        userDao.save(user);
+        User save = userDao.save(user);
+        userMidUserTypeDao.save(new UserMidUserType(null, save.getId(), (long) user.getPower()));
+
     }
 
     @Override

@@ -18,6 +18,7 @@
                     <span><input type="text" name="name" required="required"
                                  maxlength="15" class="textbox"></span>
                 </div>
+
                 <div>
                     <span><label>账号</label></span>
                     <span><input type="text" name="account" required="required"
@@ -28,7 +29,11 @@
                     <span><input type="password" name="password" required="required"
                                  minlength="8" maxlength="15" class="password"></span>
                 </div>
-                <div style="font-size: 12px;">
+                <div>
+                    医师<input type="radio" name="power" required="required" value="2">
+                    用户<input type="radio" name="power" required="required" value="3">
+                </div>
+                <div style="font-size: 12px;margin-top: 10px">
                     已有账号? <a href="/login/login_page">登录</a>
                 </div>
                 <p th:text="${msg}"></p>

@@ -51,7 +51,7 @@ public class TermTypeServiceImpl implements ITermTypeService {
     }
 
     private int countTermByTypeId(Long termTypeId) {
-        int countTerm = (int) termDao.count(Example.of(new Term().setTermTypeId(termTypeId)));
+        int countTerm = (int) termDao.count(Example.of(new Term().setTermTypeId(termTypeId).setType(1)));
         return countTerm;
     }
 

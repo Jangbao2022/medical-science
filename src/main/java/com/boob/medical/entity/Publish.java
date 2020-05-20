@@ -8,35 +8,21 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * 术语实体类
- */
 @Entity
-@Table(name = "term")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class Term {
+public class Publish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    /**
-     * 是否已审核
-     */
+    private Long userId;
     private Integer type;
-    /**
-     * 英文名
-     */
-    private String englishName;
-    private Long termTypeId;
-    private String termTypeName;
-    /**
-     * 描述
-     */
-    private String description;
+    private Long termId;
+    private String termName;
+
     private Date gmtCreated;
     private Date gmtModified;
 }
